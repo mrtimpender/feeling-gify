@@ -1,40 +1,51 @@
-img {
-  width: 150px;
-  height: 221px;
+/* Importing Grid */
+@import "grid.css";
+
+/* Fonts */
+@import 'https://fonts.googleapis.com/css?family=Bungee+Shade|Montserrat';
+/*
+font-family: 'Bungee Shade', cursive;
+font-family: 'Montserrat', sans-serif; */
+
+
+html {
+  background: url(images/balloon.svg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
-body {
-  margin: 0;
-  background-color: lightgrey;
+img {
+  max-width: 200px;
+  height: 200px;
+  margin: 5px;
 }
+
+h1 {
+  font-family: 'Bungee Shade', cursive;
+}
+
 
 #container{
   width:80%;
-  background-color: white;
-  margin: 1% auto;
-}
-
-#center_column{
-  width: 90%;
-  text-align: center;
+  margin: auto;
 }
 
 #inputField {
-  width: 40%;
-  font-size: 1em
-  margin: 1% auto;
+  font-size: 1em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
 }
 
 #submit {
-  width: auto;
   font-size: 1em;
-  margin: 1% auto;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 100;
 }
 
 #output {
-  text-align: center;
-  margin-left: auto;
-  margin-right:auto;
+  width: 100%;
 }
 
 @media only screen and (max-width: 500px) {

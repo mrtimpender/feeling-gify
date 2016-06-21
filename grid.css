@@ -1,0 +1,79 @@
+/*-- Margin & Rows --*/
+.grid-gutter {
+	width: 2%;
+}
+
+.row {
+	width: 100%;
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+.centered {
+	margin: auto;
+	text-align: center;
+}
+
+/*--  Clearfix --*/
+.row:before,
+.row:after {
+	content: " ";
+	clear: both;
+	display: table;
+}
+
+body {
+	margin: 0;
+}
+
+
+/*-- Grid --*/
+.column {
+	float: left;
+	margin-right: 2%;
+	display: block;
+	margin-top: 2%;
+}
+	.full{
+		width:99.75%;
+	}
+	.one-half {
+		width: 48.75%;
+	}
+
+	.one-third {
+		width: 31.75%;
+	}
+
+	.one-fourth {
+		width: 22.5%;
+	}
+
+	.one-fifth {
+		width: 17.4%;
+	}
+
+	.two-thirds {
+		width: 63.6666666%;
+	}
+
+	.three-fourths {
+		width: 72.5%;
+	}
+
+	.last {
+		margin-right:0;
+	}
+
+	.column last-of-type {
+		margin-right: 0;
+	}
+
+/*-- Breakpoint --*/
+@media only screen and (max-width: 850px) {
+	.one-half, .one-third, .two-thirds {
+		width: 100%;
+		margin-bottom: 2%;
+	}
+
+}

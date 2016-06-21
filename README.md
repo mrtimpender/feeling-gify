@@ -1,24 +1,20 @@
-# api traversal
+# g29-Q1-project-proposal
+# Tim Pender
 
+# Description:
+Feeling GiF-y?
+A daily check-in app that a user would use to log how they are feeling on a certain day.  This would then return a selection of GIFs for them to select.  This would record that GIF in a calendar.  Users would then be able to query their GIF feelings for the most recent week or month.  
 
-#### Instructions:
+# Technologies:
+- HTML
+- CSS
+- JS / jQuery
+- APIs
 
-make an api call to grab a movie form a text field and then
-hit omdapi get a movie :
-http://www.omdbapi.com/?s=minions
+# MVP:
+Users are able to query the Giphy server and return a selection of GIFs.  Users select Gifs and it presents that one.  
 
-
-and then append to a central div all of the images that match the title.
-The titles and images of each movie should be in ONE central column
-that goes down the middle of the page. When you scale to mobile, the column
-should remain in the middle of the page. If there's no image for a movie,
-use the "not shown" image.
-
-If you have time, build a media query so that the images and titles get
-slightly smaller if viewing on a phone.
-
-
-
-
-See mockup for example of how the image column should look. 
-
+# Nice to Have:
+- Weekly Storage
+- Monthly Storage
+- Different logins for different users
