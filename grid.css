@@ -35,7 +35,8 @@ body {
 	margin-top: 2%;
 }
 	.full{
-		width:99.75%;
+		width:100%;
+		margin-right: 0%;
 	}
 	.one-half {
 		width: 48.75%;
