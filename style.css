@@ -27,10 +27,25 @@ img {
 
 h1 {
   font-family: 'Bungee Shade', cursive;
+  display: inline-block;
+  margin: 0 auto;
 }
 
-.gifyTitle:hover {
+.hoverGreen:hover {
   color:#015458;
+}
+
+nav {
+  font-family: 'Bungee Shade', cursive;
+  font-size: 0.75em;
+  float:right;
+}
+
+li {
+  text-decoration: none;
+  list-style: none;
+  display: inline-block;
+  margin: 0 1%;
 }
 
 h4 {
@@ -48,6 +63,7 @@ h4 {
   font-size: 1em;
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
+  text-align: center;
 }
 
 #submit {

@@ -3,6 +3,7 @@ $( document ).ready(function() {
 var api_key = 'dc6zaTOxFJmzC';
 var gifChoices = [];
 var results = [];
+var today = new Date();
 $('#recentOutput').hide();
 
 
@@ -40,11 +41,10 @@ $("#submit").on('click', function(event){
 
 $(document).on('click', '.gif', function(event){
   var indexPos = this.id.substring(3);
-  $("#recentOutput").append("<img class='gif' id='" + this.id +  "' src=" + generateGifLink(gifChoices[indexPos].id) + " />" );
-  $('#recentOutput').show('blind', 'slow');
-  console.log(JSON.stringify(gifChoices[indexPos]));
-  localStorage.setItem(createDate(), JSON.stringify(gifChoices[indexPos]));
-  localStorage;
+  // $("#recentOutput").append("<img class='gif' id='" + this.id +  "' src=" + generateGifLink(gifChoices[indexPos].id) + " />" );
+  // $('#recentOutput').show('blind', 'slow');
+  localStorage.setItem(createDate(today), JSON.stringify(gifChoices[indexPos]));
+  console.log(localStorage);
 });
 
 // FUNCTIONS
@@ -62,20 +62,37 @@ function generateGifLink(id) {
   return 'https://media.giphy.com/media/' + id + '/giphy.gif'
 }
 
-function createDate(){
-    var d = new Date();
-    var today = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`
+function createDate(d){
+    // var d = new Date();
+    var aDate = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`
     //${d.getHours()}:${d.getMinutes()}
-    return today
+    return aDate
 }
 
-function getLocalStorage(){
-  for (keys in localStorage){
-    console.log(JSON.parse(localStorage[keys]));
+function getLastSeven() {
+  for (key in localStorage){
+
   }
 }
 
-getLocalStorage();
+
+// var populateCounter = 45;
+// Used to originally populate the localStorage with past date content
+function createLocalStorageKey(){
+  var key = new Date();
+  key.setDate(key.getDate()-populateCounter);
+  populateCounter--;
+  return createDate(key);
+}
+
+
+// Used to clear all the data within the localStorage
+function removeAllLocalStorage(){
+  for (key in localStorage){
+    localStorage.removeItem(key);
+  }
+}
+// removeAllLocalStorage();
 
 // Document Ready Closing tags
 });
