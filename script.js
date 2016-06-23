@@ -7,7 +7,7 @@ var today = new Date();
 $.datepicker.formatDate( 'm/dd/yy' )
 
 emptyAllOutputs();
-
+$('#recentOutput').hide();
 
 
 $("#submit").on('click', function(event){
@@ -41,12 +41,26 @@ $("#submit").on('click', function(event){
 });
 
 // EVENT LISTENERS
+$(document).on('click', '.todayNav', function(event){
+    emptyAllOutputs();
+    if (localStorage.getItem(createDate(today)) === null) {
+      setDefaultGif();
+      alert("You haven't selected a GIF today.");
+
+        $("#recentOutput").append("<div class='today column full centered' id='" + createDate(today) + "'><h5>Today</h5><img class='gif' src='https://media.giphy.com/media/11R5KYi6ZdP8Z2/giphy.gif' /></div>");
+    } else {
+      var todaysGif = JSON.parse(localStorage.getItem(createDate(today)));
+      $("#recentOutput").append("<div class='today column full centered' id='" + createDate(today) + "'><h5>Today</h5><img class='gif' src=" + generateGifLink(todaysGif.id) + " /></div>");
+    }
+    $('#recentOutput').show('blind', 'slow');
+});
+
 $(document).on('click', '.gif', function(event){
   var indexPos = this.id.substring(3);
-  $("#recentOutput").append("<img class='gif' id='" + this.id +  "' src=" + generateGifLink(gifChoices[indexPos].id) + " />" );
+  $("#recentOutput").append("<h5>Today</h5><img class='gif' id='" + this.id +  "' src=" + generateGifLink(gifChoices[indexPos].id) + " />" );
   $('#recentOutput').show('blind', 'slow');
   localStorage.setItem(createDate(today), JSON.stringify(gifChoices[indexPos]));
-  console.log(localStorage);
+  $('#output').empty();
 });
 
 $(document).on('click', '.last7', function(event){
@@ -55,25 +69,28 @@ $(document).on('click', '.last7', function(event){
 });
 
 $(document).on('click', '.mtd', function(event){
-  emptyAllOutputsNotMtd();
+  emptyAllOutputs();
+  $('#mtdoutput').hide();
+  $('#mtdOutput').removeClass('one-half').addClass('full')
+
   $('#mtdOutput').datepicker({
     dateFormat: "m/d/yy",
     maxDate: 0,
     showAnim: 'blind',
     onSelect: function(date){
-      $('#recentOutput').empty();
+
+      $('#mtdSelection').empty();
       var selected = JSON.parse(localStorage.getItem(date));
 
-      if (selected === null) {
-        alert("You did not select an entry for this day");
-        $("#recentOutput").append("<img class='gif' src='https://media.giphy.com/media/h0m6DAVQ1zBfi/giphy.gif'/><br><h5>" + date + "</h5>");
+      $('#mtdOutput').removeClass('full').addClass('one-half')
 
+      if (selected === null) {
+        $("#mtdSelection").append("<h5>You did not select a GIF on " + date + "</h5><img src='https://media.giphy.com/media/11R5KYi6ZdP8Z2/giphy.gif'/>");
 
       } else {
-        $("#recentOutput").append("<img class='gif' src=" + generateGifLink(selected.id) + " /><br><h5>" + date + "</h5>" );
-        $('#recentOutput').show('blind', 'slow');
+        $("#mtdSelection").append("<h5>" + date + "</h5><img src=" + generateGifLink(selected.id) + " />" );
         }
-
+        $('#mtdSelection').show('blind', 'slow');
       }
     });
   // $('#mtdOutput').datepicker({ dateFormat: d/mm/yy, minDate: 0, maxDate: 0, });
@@ -99,10 +116,10 @@ function generateGifLink(id) {
 
 function setDefaultGif() {
   $.ajax({
-    url: 'http://api.giphy.com/v1/gifs/h0m6DAVQ1zBfi?api_key=' + api_key,
+    url: 'http://api.giphy.com/v1/gifs/11R5KYi6ZdP8Z2?api_key=' + api_key,
     success: function (data) {
-      var joeyGif = data.data;
-      localStorage.setItem(createDate(today), JSON.stringify(joeyGif));
+      var cricketGif = data.data;
+      localStorage.setItem(createDate(today), JSON.stringify(cricketGif));
       }
     })
   }
@@ -120,6 +137,7 @@ function emptyAllOutputs() {
   $('#recentOutput').empty();
   $('#output').empty();
   $('#mtdOutput').empty();
+  $('#mtdSelection').empty();
   $('#mtdOutput').removeClass('hasDatepicker');
 }
 
@@ -127,6 +145,7 @@ function emptyAllOutputsNotMtd() {
   $('#last7Output').empty();
   $('#recentOutput').empty();
   $('#output').empty();
+  $('#mtdSelection').empty();
 }
 
 function getLastSeven() {
@@ -134,7 +153,7 @@ function getLastSeven() {
 
     // Sets Today with a default GIF, and alerts the user that they haven't picked for today
     if (localStorage.getItem(createDate(today)) === null) {
-      alert("You haven't selected a GIF today, so how you doin?");
+      alert("You haven't selected a GIF today.");
       setDefaultGif();
     // Proceeds to populate the previous 7 days
       for (var i = 1; i<8; i++){

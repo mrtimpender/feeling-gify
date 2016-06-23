@@ -8,24 +8,26 @@
   </head>
   <body>
     <div id="container">
+      <h1 class='row centered'>Feeling GiFy?</h1>
         <nav class="column full centered row">
-          <li class="hoverGreen last7">Last 7 Days</li> |
-          <li class="hoverGreen mtd">Your Past GIFs</li>
+          <li class="hoverBlue todayNav">Today</li>
+          <li class="hoverBlue last7">Last 7 Days</li>
+          <li class="hoverBlue mtd">Your Past GIFs</li>
         </nav>
 
         <div class="column full centered">
-        <h1>Feeling <span class="hoverGreen">GiF</span>y?</h1>
 
         <h4>GIF to know yourself</h4>
         <!-- Need to insert form here -->
-        <input type="text" placeholder="How are you today?  :)" autofocus id="inputField">
+        <input type="text" placeholder=":-)" id="inputField">
         <br>
         <button id="submit">gif it!</button>
         <!-- Need to end form here -->
         <div id="recentOutput" class="column full"></div>
         <div id="output" class="column full"></div>
         <div id="last7Output" class="column full"></div>
-        <div id="mtdOutput" class="column full"></div>
+        <div id="mtdSelection" class="column one-half"></div>
+        <div id="mtdOutput" class="column one-half centered"></div>
 
       </div>
     </div>

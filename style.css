@@ -21,7 +21,6 @@ img {
   height: 200px;
   margin: 5px;
   border-radius: 5px;
-  /*box-shadow: 1px 1px grey;*/
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
 }
 
@@ -30,14 +29,15 @@ img {
   text-align: center;
 }
 
-h1, h5 {
+h1, h4, h5 {
   font-family: 'Bungee Shade', cursive;
-  display: inline-block;
-  margin: 0 auto;
+  display: block;
+  margin: 1% auto;
 }
 
-.hoverGreen:hover {
-  color:#00474B;
+.hoverBlue:hover {
+  color:#017487;
+  cursor: pointer;
 }
 
 .today {
@@ -97,7 +97,8 @@ h4 {
 }
 
 #submit:hover {
-  color: #FFFFAE;
+  color: #aff3ff;
+  cursor: pointer;
   /*background: #B6CFE8;
   background-image: -webkit-linear-gradient(top, #B6CFE8, #017487);
   background-image: -moz-linear-gradient(top, #B6CFE8, #017487);
@@ -107,11 +108,14 @@ h4 {
   text-decoration: none;
   border:none;
 }
-/*
-#output {
-  width: 100%;
-}*/
 
+#submit:focus {
+  outline:1px !important;
+}
+
+#mtdSelection {
+  display: block;
+}
 @media only screen and (max-width: 500px) {
     img {
       max-width: 200px;
