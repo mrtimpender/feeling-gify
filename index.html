@@ -4,30 +4,34 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="style.css" charset="utf-8">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
   </head>
   <body>
     <div id="container">
         <nav class="column full centered row">
-          <li class="hoverGreen">Last 7 Days</li> |
-          <li class="hoverGreen">Month to Date</li>
+          <li class="hoverGreen last7">Last 7 Days</li> |
+          <li class="hoverGreen mtd">Month to Date</li>
         </nav>
 
         <div class="column full centered">
-        <h1><span class="hoverGreen">Feeling GiFy?</span></h1>
+        <h1>Feeling <span class="hoverGreen">GiF</span>y?</h1>
 
         <h4>GIF to know yourself</h4>
+        <!-- Need to insert form here -->
         <input type="text" placeholder="How are you today?  :)" autofocus id="inputField">
         <br>
         <button id="submit">gif it!</button>
-        <div id="output" class="column full"></div>
-
+        <!-- Need to end form here -->
         <div id="recentOutput" class="column full"></div>
-        <div id="lastSeven" class="column full"></div>
+        <div id="output" class="column full"></div>
+        <div id="last7Output" class="column full"></div>
+        <div id="mtdOutput" class="column full"></div>
 
       </div>
     </div>
   </body>
   <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
   <script type="text/javascript" src="script.js">
   </script>

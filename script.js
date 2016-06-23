@@ -4,17 +4,17 @@ var api_key = 'dc6zaTOxFJmzC';
 var gifChoices = [];
 var results = [];
 var today = new Date();
-$('#recentOutput').hide();
+emptyAllOutputs();
 
 
 
 $("#submit").on('click', function(event){
-  $('#output').hide();
   var search = $("#inputField").val();
   search = search.replace(/\s/g,'+')
   gifChoices = [];
 
-  $("#output").html("");
+  emptyAllOutputs();
+  $('#output').hide();
   event.preventDefault();
 
   $.ajax({
@@ -30,22 +30,32 @@ $("#submit").on('click', function(event){
           gifChoices.push(gif);
           var id = gif.id;
           $("#output").append("<img class='column one-fifth gif' id='gif" + counter +  "' src=" + generateGifLink(id) + " />" );
-          $('#output').show('blind', 'slow');
           counter++;
           }
         });
+        $('#output').show('blind', 'slow');
       }
     })
 });
 
-
+// EVENT LISTENERS
 $(document).on('click', '.gif', function(event){
   var indexPos = this.id.substring(3);
-  // $("#recentOutput").append("<img class='gif' id='" + this.id +  "' src=" + generateGifLink(gifChoices[indexPos].id) + " />" );
-  // $('#recentOutput').show('blind', 'slow');
+  $("#recentOutput").append("<img class='gif' id='" + this.id +  "' src=" + generateGifLink(gifChoices[indexPos].id) + " />" );
+  $('#recentOutput').show('blind', 'slow');
   localStorage.setItem(createDate(today), JSON.stringify(gifChoices[indexPos]));
   console.log(localStorage);
 });
+
+$(document).on('click', '.last7', function(event){
+  emptyAllOutputs();
+  getLastSeven();
+});
+
+$(document).on('click', '.mtd', function(event){
+  emptyAllOutputs();
+  $('#mtdOutput').datepicker();
+})
 
 // FUNCTIONS
 function shuffleArray(array) {
@@ -69,10 +79,33 @@ function createDate(d){
     return aDate
 }
 
-function getLastSeven() {
-  for (key in localStorage){
+function emptyAllOutputs() {
+  $('#last7Output').empty();
+  $('#recentOutput').empty();
+  $('#output').empty();
+  $('#mtdOutput').empty();
+}
 
-  }
+function getLastSeven() {
+    $('#last7Output').hide();
+    var todaysGif = JSON.parse(localStorage.getItem(createDate(today)));
+
+// Add an If state that shows tests the object for today
+
+    // Adds Today with Custom Header
+    $("#last7Output").append("<div class='today column one-fourth' id='" + createDate(today) + "'><h5>Today</h5><img class='gif' src=" + generateGifLink(todaysGif.id) + " /></div>");
+
+    // Loops through the last 7 previous days
+    for (var i = 1; i<8; i++){
+      var tempDate = new Date();
+      tempDate.setDate(tempDate.getDate()-(i))
+      var tempItem = localStorage.getItem(createDate(tempDate));
+      tempItem = JSON.parse(tempItem);
+
+      $("#last7Output").append("<div class='column one-fourth' id='" + createDate(tempDate) + "'><h5>" + createDate(tempDate) + "</h5><img class='gif' src=" + generateGifLink(tempItem.id) + " /></div>");
+    }
+
+    $('#last7Output').show('blind', 'slow');
 }
 
 
