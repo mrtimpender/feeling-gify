@@ -4,6 +4,8 @@ var api_key = 'dc6zaTOxFJmzC';
 var gifChoices = [];
 var results = [];
 var today = new Date();
+$.datepicker.formatDate( 'm/dd/yy' )
+
 emptyAllOutputs();
 
 
@@ -54,8 +56,15 @@ $(document).on('click', '.last7', function(event){
 
 $(document).on('click', '.mtd', function(event){
   emptyAllOutputs();
-  $('#mtdOutput').datepicker();
+  $('#mtdOutput').datepicker({
+    dateFormat: "d/mm/yy",
+    maxDate: 0,
+    showAnim: 'blind'  });
+  // $('#mtdOutput').datepicker({ dateFormat: d/mm/yy, minDate: 0, maxDate: 0, });
+
 })
+
+
 
 // FUNCTIONS
 function shuffleArray(array) {
@@ -65,12 +74,23 @@ function shuffleArray(array) {
       array[i] = array[j];
       array[j] = temp;
     }
-return array;
-};
+    return array;
+  };
 
 function generateGifLink(id) {
   return 'https://media.giphy.com/media/' + id + '/giphy.gif'
 }
+
+function setDefaultGif() {
+  $.ajax({
+    url: 'http://api.giphy.com/v1/gifs/h0m6DAVQ1zBfi?api_key=' + api_key,
+    success: function (data) {
+      var joeyGif = data.data;
+      localStorage.setItem(createDate(today), JSON.stringify(joeyGif));
+      }
+    })
+  }
+
 
 function createDate(d){
     // var d = new Date();
@@ -88,12 +108,27 @@ function emptyAllOutputs() {
 
 function getLastSeven() {
     $('#last7Output').hide();
-    var todaysGif = JSON.parse(localStorage.getItem(createDate(today)));
 
-// Add an If state that shows tests the object for today
+    // Sets Today with a default GIF, and alerts the user that they haven't picked for today
+    if (localStorage.getItem(createDate(today)) === null) {
+      alert("You haven't selected a GIF today, so how you doin?");
+      setDefaultGif();
+    // Proceeds to populate the previous 7 days
+      for (var i = 1; i<8; i++){
+        var tempDate = new Date();
+        tempDate.setDate(tempDate.getDate()-(i))
+        var tempItem = localStorage.getItem(createDate(tempDate));
+        tempItem = JSON.parse(tempItem);
 
-    // Adds Today with Custom Header
-    $("#last7Output").append("<div class='today column one-fourth' id='" + createDate(today) + "'><h5>Today</h5><img class='gif' src=" + generateGifLink(todaysGif.id) + " /></div>");
+        $("#last7Output").append("<div class='column one-fourth' id='" + createDate(tempDate) + "'><h5>" + createDate(tempDate) + "</h5><img class='gif' src=" + generateGifLink(tempItem.id) + " /></div>");
+      }
+
+      $('#last7Output').show('blind', 'slow');
+
+    } else {
+    // Sets Todays GIF with custom header
+      var todaysGif = JSON.parse(localStorage.getItem(createDate(today)));
+      $("#last7Output").append("<div class='today column one-fourth' id='" + createDate(today) + "'><h5>Today</h5><img class='gif' src=" + generateGifLink(todaysGif.id) + " /></div>");
 
     // Loops through the last 7 previous days
     for (var i = 1; i<8; i++){
@@ -106,6 +141,7 @@ function getLastSeven() {
     }
 
     $('#last7Output').show('blind', 'slow');
+  }
 }
 
 
