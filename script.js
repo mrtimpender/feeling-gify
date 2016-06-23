@@ -55,11 +55,27 @@ $(document).on('click', '.last7', function(event){
 });
 
 $(document).on('click', '.mtd', function(event){
-  emptyAllOutputs();
+  emptyAllOutputsNotMtd();
   $('#mtdOutput').datepicker({
-    dateFormat: "d/mm/yy",
+    dateFormat: "m/d/yy",
     maxDate: 0,
-    showAnim: 'blind'  });
+    showAnim: 'blind',
+    onSelect: function(date){
+      $('#recentOutput').empty();
+      var selected = JSON.parse(localStorage.getItem(date));
+
+      if (selected === null) {
+        alert("You did not select an entry for this day");
+        $("#recentOutput").append("<img class='gif' src='https://media.giphy.com/media/h0m6DAVQ1zBfi/giphy.gif'/><br><h5>" + date + "</h5>");
+
+
+      } else {
+        $("#recentOutput").append("<img class='gif' src=" + generateGifLink(selected.id) + " /><br><h5>" + date + "</h5>" );
+        $('#recentOutput').show('blind', 'slow');
+        }
+
+      }
+    });
   // $('#mtdOutput').datepicker({ dateFormat: d/mm/yy, minDate: 0, maxDate: 0, });
 
 })
@@ -104,6 +120,13 @@ function emptyAllOutputs() {
   $('#recentOutput').empty();
   $('#output').empty();
   $('#mtdOutput').empty();
+  $('#mtdOutput').removeClass('hasDatepicker');
+}
+
+function emptyAllOutputsNotMtd() {
+  $('#last7Output').empty();
+  $('#recentOutput').empty();
+  $('#output').empty();
 }
 
 function getLastSeven() {
