@@ -39,7 +39,7 @@ body {
     margin-right: 0%;
 }
 .one-half {
-    width: 47.75%;
+    width: 48.75%;
 }
 .one-third {
     width: 31.75%;
@@ -59,14 +59,21 @@ body {
 .last {
     margin-right: 0;
 }
-.column last-of-type {
+.column:last-of-type {
     margin-right: 0;
 }
 
 /*-- Breakpoint --*/
 
-@media only screen and (max-width: 850px) {
-    .one-half, .one-third, .two-thirds {
+@media only screen and (max-width: 950px) {
+    .one-half, .one-third, .one-fourth, .one-fifth {
+        width: 100%;
+        margin-bottom: 2%;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .one-half, .one-third, .one-fourth, .one-fifth {
         width: 100%;
         margin-bottom: 2%;
     }

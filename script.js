@@ -26,10 +26,10 @@ $(document).ready(function() {
                 results = shuffleArray(temp);
 
                 temp.forEach(function(gif) {
-                    if (counter < 5) {
+                    if (counter < 4) {
                         gifChoices.push(gif);
                         var id = gif.id;
-                        $("#output").append("<img class='column one-fifth gif' id='gif" + counter + "' src=" + generateGifLink(id) + " />");
+                        $("#output").append("<div class='column one-fourth'><img class='gif' id='gif" + counter + "' src=" + generateGifLink(id) + " /></div>");
                         counter++;
                     }
                 });
@@ -42,13 +42,13 @@ $(document).ready(function() {
     $(document).on('click', '.todayNav', function(event) {
         emptyAllOutputs();
         $('#recentOutput').hide();
+        var todaysGif = JSON.parse(localStorage.getItem(createDate(today)));
         if (localStorage.getItem(createDate(today)) === null) {
             setDefaultGif();
-            alert("You haven't selected a GIF today.");
-
-            $("#recentOutput").append("<div class='today column full centered' id='" + createDate(today) + "'><h3>Today</h3><img class='gif' src='https://media.giphy.com/media/11R5KYi6ZdP8Z2/giphy.gif' /></div>");
+            $("#recentOutput").append("<div class='today column full centered' id='" + createDate(today) + "'><h3>Today</h3><img class='gif' src='https://media.giphy.com/media/11R5KYi6ZdP8Z2/giphy.gif' /><null-subheader>You did not select a GIF.</null-subheader></div>");
+        } else if (todaysGif.id === "11R5KYi6ZdP8Z2") {
+            $("#recentOutput").append("<div class='today column full centered' id='" + createDate(today) + "'><h3>Today</h3><img class='gif' src='https://media.giphy.com/media/11R5KYi6ZdP8Z2/giphy.gif' /><null-subheader>You did not select a GIF.</null-subheader></div>");
         } else {
-            var todaysGif = JSON.parse(localStorage.getItem(createDate(today)));
             $("#recentOutput").append("<div class='today column full centered' id='" + createDate(today) + "'><h3>Today</h3><img class='gif' src=" + generateGifLink(todaysGif.id) + " /></div>");
         }
         $('#recentOutput').show('blind', 'slow');
@@ -56,11 +56,12 @@ $(document).ready(function() {
 
     // SELECTING TODAY'S GIF
     $(document).on('click', '.gif', function(event) {
+        emptyAllOutputs();
+        $("#recentOutput").hide();
         var indexPos = this.id.substring(3);
-        $("#recentOutput").append("<h3>Today</h3><img class='gif' id='" + this.id + "' src=" + generateGifLink(gifChoices[indexPos].id) + " />");
+        $("#recentOutput").append("<div class='column full'><h3>Today</h3><img src=" + generateGifLink(gifChoices[indexPos].id) + " /></div>");
         $('#recentOutput').show('blind', 'slow');
         localStorage.setItem(createDate(today), JSON.stringify(gifChoices[indexPos]));
-        $('#output').empty();
     });
 
     // LAST SEVEN DAYS NAV
@@ -88,9 +89,11 @@ $(document).ready(function() {
                 var selected = JSON.parse(localStorage.getItem(date));
 
 
-                if (selected === null) {
-                    $("#calendarSelection").append("<h3>You did not select a GIF on " + date + "</h3><img src='https://media.giphy.com/media/11R5KYi6ZdP8Z2/giphy.gif'/>");
 
+                if (selected === null) {
+                    $("#calendarSelection").append("<h3>" + date + "</h3><img src='https://media.giphy.com/media/11R5KYi6ZdP8Z2/giphy.gif'/><null-subheader>You did not select a GIF.</null-subheader>");
+                } else if (selected.id === "11R5KYi6ZdP8Z2") {
+                    $("#calendarSelection").append("<h3>" + date + "</h3><img src='https://media.giphy.com/media/11R5KYi6ZdP8Z2/giphy.gif' /><null-subheader>You did not select a GIF.</null-subheader>");
                 } else {
                     $("#calendarSelection").append("<h3>" + date + "</h3><img src=" + generateGifLink(selected.id) + " />");
                 }
@@ -152,7 +155,6 @@ $(document).ready(function() {
 
         // Sets Today with a default GIF, and alerts the user that they haven't picked for today
         if (localStorage.getItem(createDate(today)) === null) {
-            alert("You haven't selected a GIF today yet.");
             setDefaultGif();
             // Proceeds to populate the previous 7 days
             for (var i = 1; i < 8; i++) {

@@ -1,0 +1,12 @@
+.ui-datepicker {
+  margin: auto;
+  text-align: center;
+}
+
+.ui-datepicker-title {
+  font-family: 'Bungee Shade', cursive;
+}
+
+thead, tbody {
+  font-family: 'Montserrat', sans-serif;
+}

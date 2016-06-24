@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <container>
+    <div id="container">
         <h1 class="centered row header">Feeling GiFy?</h1>
         <nav class="centered row">
           <ul>
@@ -23,19 +23,19 @@
         <div class="column full centered">
 
           <form>
-            <input type="text" placeholder=":-)" id="inputField">
+            <input type="text" placeholder="Set today's GIF" id="inputField">
             <br>
             <button id="submit">gif it!</button>
           </form>
             <!-- Need to end form here -->
             <div id="recentOutput" class="column full"></div>
-            <div id="output" class="column full"></div>
+            <div id="output" class="column full centered"></div>
             <div id="last7Output" class="column full"></div>
-            <div id="calendarSelection" class="column one-half"></div>
             <div id="calendarOutput" class="column full centered"></div>
+            <div id="calendarSelection" class="column one-half"></div>
 
         </div>
-    </container>
+    </div>
 </body>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
