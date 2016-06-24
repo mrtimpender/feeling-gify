@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="style.css" charset="utf-8">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-  </head>
-  <body>
-    <div id="container">
-      <h1 class='row centered'>Feeling GiFy?</h1>
-        <nav class="column full centered row">
-          <li class="hoverBlue todayNav">Today</li>
-          <li class="hoverBlue last7">Last 7 Days</li>
-          <li class="hoverBlue mtd">Your Past GIFs</li>
+</head>
+
+<body>
+    <container>
+        <h1 class="centered row header">Feeling GiFy?</h1>
+        <nav class="centered row">
+          <ul>
+            <li class="hoverBlue lastSevenNav">Last 7 Days</li>
+            <li class="hoverBlue todayNav">Today</li>
+            <li class="hoverBlue calendarNav">Past GIFs</li>
+          </ul>
+            <subheader class="centered row">GIF to know yourself</subheader>
         </nav>
 
         <div class="column full centered">
 
-        <h4>GIF to know yourself</h4>
-        <!-- Need to insert form here -->
-        <input type="text" placeholder=":-)" id="inputField">
-        <br>
-        <button id="submit">gif it!</button>
-        <!-- Need to end form here -->
-        <div id="recentOutput" class="column full"></div>
-        <div id="output" class="column full"></div>
-        <div id="last7Output" class="column full"></div>
-        <div id="mtdSelection" class="column one-half"></div>
-        <div id="mtdOutput" class="column one-half centered"></div>
+          <form>
+            <input type="text" placeholder=":-)" id="inputField">
+            <br>
+            <button id="submit">gif it!</button>
+          </form>
+            <!-- Need to end form here -->
+            <div id="recentOutput" class="column full"></div>
+            <div id="output" class="column full"></div>
+            <div id="last7Output" class="column full"></div>
+            <div id="calendarSelection" class="column one-half"></div>
+            <div id="calendarOutput" class="column full centered"></div>
 
-      </div>
-    </div>
-  </body>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="script.js">
-  </script>
+        </div>
+    </container>
+</body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+
 </html>
