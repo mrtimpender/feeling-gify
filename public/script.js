@@ -19,7 +19,7 @@ $(document).ready(function() {
         event.preventDefault();
 
         $.ajax({
-            url: 'http://api.giphy.com/v1/gifs/search?q=' + search + '&api_key=' + api_key,
+            url: 'https://api.giphy.com/v1/gifs/search?q=' + search + '&api_key=' + api_key,
             success: function(data) {
                 var temp = data.data;
                 var counter = 0;
@@ -122,7 +122,7 @@ $(document).ready(function() {
 
     function setDefaultGif() {
         $.ajax({
-            url: 'http://api.giphy.com/v1/gifs/11R5KYi6ZdP8Z2?api_key=' + api_key,
+            url: 'https://api.giphy.com/v1/gifs/11R5KYi6ZdP8Z2?api_key=' + api_key,
             success: function(data) {
                 var cricketGif = data.data;
                 localStorage.setItem(createDate(today), JSON.stringify(cricketGif));
@@ -210,7 +210,6 @@ $(document).ready(function() {
             localStorage.removeItem(key);
         }
     }
-
     // removeAllLocalStorage();
 
     // Document Ready Closing tags
