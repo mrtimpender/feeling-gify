@@ -126,9 +126,6 @@ $(document).ready(function() {
             success: function(data) {
                 var cricketGif = data.data;
                 localStorage.setItem(createDate(today), JSON.stringify(cricketGif));
-
-
-                console.log(cricketGif);
             }
         })
     }
@@ -184,13 +181,28 @@ $(document).ready(function() {
                 var tempDate = new Date();
                 tempDate.setDate(tempDate.getDate() - (i))
                 var tempItem = localStorage.getItem(createDate(tempDate));
-                tempItem = JSON.parse(tempItem);
 
-                $("#last7Output").append("<div class='column one-fourth' id='" + createDate(tempDate) + "'><h3>" + createDate(tempDate) + "</h3><img class='gif' src=" + generateGifLink(tempItem.id) + " /></div>");
+                if (tempItem === null) {
+                    setTempGif(tempDate);
+
+                } else {
+                    tempItem = JSON.parse(tempItem);
+                    $("#last7Output").append("<div class='column one-fourth' id='" + createDate(tempDate) + "'><h3>" + createDate(tempDate) + "</h3><img class='gif' src=" + generateGifLink(tempItem.id) + " /></div>");
+                }
             }
 
             $('#last7Output').show('blind', 'slow');
         }
+    }
+
+    function setTempGif(tempDate) {
+        $.ajax({
+            url: 'https://api.giphy.com/v1/gifs/11R5KYi6ZdP8Z2?api_key=' + api_key,
+            success: function(data) {
+                var cricketGif = data.data;
+                return localStorage.setItem(createDate(tempDate), JSON.stringify(cricketGif));
+            }
+        })
     }
 
 
