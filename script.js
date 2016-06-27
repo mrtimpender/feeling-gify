@@ -6,6 +6,7 @@ $(document).ready(function() {
     var today = new Date();
     $.datepicker.formatDate('m/dd/yy')
 
+
     // EVENT LISTENERS
     // INPUT / SEARCH
     $("#submit").on('click', function(event) {
@@ -125,6 +126,9 @@ $(document).ready(function() {
             success: function(data) {
                 var cricketGif = data.data;
                 localStorage.setItem(createDate(today), JSON.stringify(cricketGif));
+
+
+                console.log(cricketGif);
             }
         })
     }
@@ -153,12 +157,14 @@ $(document).ready(function() {
     function getLastSeven() {
         $('#last7Output').hide();
 
-        // Sets Today with a default GIF, and alerts the user that they haven't picked for today
+        // Sets Today with a default GIF
         if (localStorage.getItem(createDate(today)) === null) {
             setDefaultGif();
+
             // Proceeds to populate the previous 7 days
             for (var i = 1; i < 8; i++) {
                 var tempDate = new Date();
+
                 tempDate.setDate(tempDate.getDate() - (i))
                 var tempItem = localStorage.getItem(createDate(tempDate));
                 tempItem = JSON.parse(tempItem);
@@ -204,6 +210,7 @@ $(document).ready(function() {
             localStorage.removeItem(key);
         }
     }
+
     // removeAllLocalStorage();
 
     // Document Ready Closing tags
