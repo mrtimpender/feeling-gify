@@ -20,7 +20,7 @@ $(document).ready(function() {
 
         $.ajax({
             url: 'https://api.giphy.com/v1/gifs/search?q=' + search + '&api_key=' + api_key,
-            url: '/localhost:3000/users'
+            // url: '/localhost:3000/users',
             success: function(data) {
                 var temp = data.data;
                 var counter = 0;
